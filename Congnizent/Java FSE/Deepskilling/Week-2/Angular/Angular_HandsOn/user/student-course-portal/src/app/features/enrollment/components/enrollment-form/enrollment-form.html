@@ -1,0 +1,127 @@
+<div class="form-page-container">
+  <div class="form-card glass-card">
+    <h1 class="form-title">Enrollment Request <span class="badge-type">Template-Driven</span></h1>
+    <p class="form-subtitle">Submit a request to enroll in an academic course.</p>
+
+    <!-- Success Message -->
+    <div *ngIf="submitted" class="success-message alert-success">
+      <span class="success-icon">✓</span>
+      <p>Enrollment request submitted successfully!</p>
+    </div>
+
+    <form #enrollForm="ngForm" (ngSubmit)="onSubmit(enrollForm)" novalidate>
+      
+      <!-- Student Name -->
+      <div class="form-group">
+        <label for="studentName">Student Full Name</label>
+        <input 
+          type="text" 
+          id="studentName" 
+          name="studentName" 
+          [(ngModel)]="studentName" 
+          #nameCtrl="ngModel"
+          required 
+          minlength="3" 
+          placeholder="Enter your full name" 
+          class="form-control">
+        
+        <div class="error-container">
+          <span *ngIf="nameCtrl.touched && nameCtrl.errors?.['required']" class="error-text">
+            Name is required.
+          </span>
+          <span *ngIf="nameCtrl.touched && nameCtrl.errors?.['minlength']" class="error-text">
+            Name must be at least 3 characters.
+          </span>
+        </div>
+      </div>
+
+      <!-- Student Email -->
+      <div class="form-group">
+        <label for="studentEmail">Student Email</label>
+        <input 
+          type="email" 
+          id="studentEmail" 
+          name="studentEmail" 
+          [(ngModel)]="studentEmail" 
+          #emailCtrl="ngModel"
+          required 
+          email 
+          placeholder="enter.name@college.edu" 
+          class="form-control">
+
+        <div class="error-container">
+          <span *ngIf="emailCtrl.touched && emailCtrl.errors?.['required']" class="error-text">
+            Email is required.
+          </span>
+          <span *ngIf="emailCtrl.touched && emailCtrl.errors?.['email']" class="error-text">
+            Please enter a valid email address.
+          </span>
+        </div>
+      </div>
+
+      <!-- Course ID -->
+      <div class="form-group">
+        <label for="courseId">Course ID</label>
+        <input 
+          type="number" 
+          id="courseId" 
+          name="courseId" 
+          [(ngModel)]="courseId" 
+          #courseCtrl="ngModel"
+          required 
+          placeholder="e.g. 101" 
+          class="form-control">
+
+        <div class="error-container">
+          <span *ngIf="courseCtrl.touched && courseCtrl.errors?.['required']" class="error-text">
+            Course ID is required.
+          </span>
+        </div>
+      </div>
+
+      <!-- Preferred Semester -->
+      <div class="form-group">
+        <label for="preferredSemester">Preferred Semester</label>
+        <select 
+          id="preferredSemester" 
+          name="preferredSemester" 
+          [(ngModel)]="preferredSemester" 
+          class="form-control">
+          <option value="Odd">Odd Semester</option>
+          <option value="Even">Even Semester</option>
+        </select>
+      </div>
+
+      <!-- Agree to Terms -->
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            id="agreeToTerms" 
+            name="agreeToTerms" 
+            [(ngModel)]="agreeToTerms" 
+            #termsCtrl="ngModel"
+            required>
+          <span>I agree to the college enrollment terms and conditions.</span>
+        </label>
+        
+        <div class="error-container">
+          <span *ngIf="termsCtrl.touched && termsCtrl.errors?.['required']" class="error-text">
+            You must agree to the terms to proceed.
+          </span>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button type="button" (click)="enrollForm.resetForm()" class="btn btn-secondary">
+          Reset
+        </button>
+        <button type="submit" [disabled]="enrollForm.invalid" class="btn btn-primary">
+          Submit Request
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

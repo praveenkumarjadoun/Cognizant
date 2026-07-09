@@ -1,0 +1,65 @@
+<div class="profile-container">
+  <!-- Profile info block -->
+  <section class="profile-card glass-card">
+    <div class="profile-avatar">AM</div>
+    <div class="profile-info">
+      <h1 class="student-name">{{ studentName }}</h1>
+      <p class="student-email">{{ studentEmail }}</p>
+      <div class="profile-badge-row">
+        <span class="badge badge-passed">GPA: {{ studentGpa }}</span>
+        <span class="badge badge-pending">Active Student</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enrolled courses list -->
+  <section class="enrolled-courses-section glass-card">
+    <h2 class="section-title">My Registered Courses</h2>
+    <p class="section-desc">You are currently enrolled in the following courses.</p>
+
+    <div *ngIf="enrolledCourses$ | async as enrolledCourses">
+      <div *ngIf="enrolledCourses.length > 0; else noEnrolled" class="courses-table-wrapper">
+        <table class="courses-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Credits</th>
+              <th>Grade Status</th>
+              <th class="actions-header">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let course of enrolledCourses">
+              <td><span class="course-code">{{ course.code }}</span></td>
+              <td class="course-name">{{ course.name }}</td>
+              <td>{{ course.credits }}</td>
+              <td>
+                <span [class]="'badge badge-' + course.gradeStatus">{{ course.gradeStatus }}</span>
+              </td>
+              <td class="action-cell">
+                <button (click)="unenroll(course.id)" class="btn-unenroll">Unenroll</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noEnrolled>
+      <div class="empty-enrolled">
+        <p>You have not registered for any courses yet. Go to <a routerLink="/courses" class="text-link">Courses</a> to register.</p>
+      </div>
+    </ng-template>
+  </section>
+
+  <!-- Notification Widgets (Scoped) -->
+  <section class="notifications-section">
+    <h2 class="section-title">Support & System Alerts</h2>
+    <p class="section-desc">Observe the component-level DI: Typing in one widget will not affect the other because their services are scoped individually.</p>
+    <div class="notifications-row">
+      <app-notification></app-notification>
+      <app-notification></app-notification>
+    </div>
+  </section>
+</div>

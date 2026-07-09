@@ -1,0 +1,44 @@
+<div class="detail-container">
+  <div class="detail-card glass-card" *ngIf="course; else notFound">
+    <div class="detail-header">
+      <span class="detail-code">{{ course.code }}</span>
+      <span [class]="'badge badge-' + course.gradeStatus">{{ course.gradeStatus }}</span>
+    </div>
+    
+    <h1 class="detail-title">{{ course.name }}</h1>
+    
+    <div class="detail-body">
+      <div class="detail-info-row">
+        <span class="info-label">Academic Units:</span>
+        <span class="info-value">{{ course.credits }} Credits</span>
+      </div>
+      <div class="detail-info-row">
+        <span class="info-label">Course Reference ID:</span>
+        <span class="info-value">#{{ course.id }}</span>
+      </div>
+      
+      <div class="detail-description">
+        <h3 class="desc-heading">Course Description</h3>
+        <p class="desc-text">
+          This course offers a deep dive into the subject, combining core theoretical lectures with practical lab assignments. Students will develop foundational concepts, understand best practices, and work on real-world engineering projects to build comprehensive, deployable software systems.
+        </p>
+      </div>
+    </div>
+    
+    <div class="detail-actions">
+      <button (click)="goBack()" class="btn btn-secondary">
+        ← Back to Courses
+      </button>
+    </div>
+  </div>
+  
+  <ng-template #notFound>
+    <div class="detail-card glass-card text-center">
+      <h2>Course Not Found</h2>
+      <p class="text-secondary">The requested course ID does not exist or has been removed.</p>
+      <button (click)="goBack()" class="btn btn-primary mt-4">
+        Back to Courses
+      </button>
+    </div>
+  </ng-template>
+</div>

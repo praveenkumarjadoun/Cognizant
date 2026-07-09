@@ -1,0 +1,60 @@
+<div class="course-list-page">
+  <div class="list-header">
+    <h1 class="list-title">Academic Courses</h1>
+    <p class="list-subtitle">Explore courses available for enrollment this semester.</p>
+  </div>
+
+  <!-- Search section -->
+  <div class="search-bar-section glass-card">
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      (ngModelChange)="onSearchChange()" 
+      placeholder="Search by course code or title..." 
+      class="search-input">
+  </div>
+
+  <!-- Error Alert -->
+  <div *ngIf="errorMessage$ | async as error" class="error-alert glass-card">
+    <div class="alert-content">
+      <span class="alert-badge error-badge">Error</span>
+      <p class="alert-text">{{ error }}</p>
+    </div>
+  </div>
+
+  <!-- Selection Alert -->
+  <div *ngIf="selectedCourseId" class="enrollment-alert glass-card">
+    <div class="alert-content">
+      <span class="alert-badge">Success</span>
+      <p class="alert-text">Enrollment request logged for Course ID: <strong>{{ selectedCourseId }}</strong></p>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading$ | async" class="loading-state glass-card">
+    <div class="loader-spinner"></div>
+    <p class="loader-text">Loading courses, please wait...</p>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div *ngIf="!(isLoading$ | async)">
+    <div *ngIf="courses$ | async as coursesList">
+      <div *ngIf="coursesList.length > 0; else noCourses" class="courses-grid">
+        <app-course-card 
+          *ngFor="let c of coursesList; let i = index; trackBy: trackByCourseId" 
+          [course]="c" 
+          (enrollRequested)="onEnroll($event)"
+          (click)="navigateToCourse(c.id)"
+          class="clickable-card">
+        </app-course-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty Fallback Template -->
+  <ng-template #noCourses>
+    <div class="empty-courses glass-card">
+      <p class="empty-text">No courses available.</p>
+    </div>
+  </ng-template>
+</div>

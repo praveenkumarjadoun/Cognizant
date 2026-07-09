@@ -1,0 +1,71 @@
+{
+  "courses": [
+    {
+      "id": "1",
+      "name": "Web Development with Angular",
+      "code": "CS101",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": "2",
+      "name": "Advanced Java Programming",
+      "code": "CS102",
+      "credits": 3,
+      "gradeStatus": "pending"
+    },
+    {
+      "id": "3",
+      "name": "Database Management Systems",
+      "code": "CS103",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": "4",
+      "name": "Data Structures and Algorithms",
+      "code": "CS201",
+      "credits": 4,
+      "gradeStatus": "failed"
+    },
+    {
+      "id": "5",
+      "name": "Cloud Computing Essentials",
+      "code": "CS202",
+      "credits": 3,
+      "gradeStatus": "pending"
+    },
+    {
+      "name": "New Mock Course 291",
+      "code": "CS30291",
+      "credits": 3,
+      "gradeStatus": "pending",
+      "id": "cD4636y0BRY"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "name": "Alex Mercer",
+      "email": "alex.mercer@college.edu"
+    }
+  ],
+  "enrollments": [
+    {
+      "id": "1",
+      "studentId": 1,
+      "courseId": 1
+    },
+    {
+      "id": "2",
+      "studentId": 1,
+      "courseId": 3
+    },
+    {
+      "id": "3",
+      "studentId": 1,
+      "courseId": 5
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

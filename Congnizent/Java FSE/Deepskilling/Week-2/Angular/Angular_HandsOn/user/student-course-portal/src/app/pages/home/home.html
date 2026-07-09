@@ -1,0 +1,60 @@
+<div class="home-container">
+  <!-- Welcome / Banner Section -->
+  <section class="hero-section glass-card">
+    <h1 class="hero-title">{{ portalName }}</h1>
+    <p class="hero-desc">
+      Manage your academic journey with ease. View your enrolled courses, check your grades, and search for new study programs all in one place.
+    </p>
+    
+    <div class="hero-actions">
+      <button [disabled]="!isPortalActive" (click)="onEnrollClick()" class="btn btn-primary">
+        Enroll Now
+      </button>
+      @if (message) {
+        <p class="enroll-message">{{ message }}</p>
+      }
+    </div>
+  </section>
+
+  <!-- Statistics Row -->
+  <section class="stats-grid">
+    <div class="stat-card glass-card">
+      <div class="stat-icon icon-courses"></div>
+      <div class="stat-value">{{ coursesAvailableCount }}</div>
+      <div class="stat-label">Courses Available</div>
+    </div>
+    
+    <div class="stat-card glass-card">
+      <div class="stat-icon icon-enrolled"></div>
+      <div class="stat-value">{{ coursesEnrolledCount }}</div>
+      <div class="stat-label">Enrolled Courses</div>
+    </div>
+    
+    <div class="stat-card glass-card">
+      <div class="stat-icon icon-gpa"></div>
+      <div class="stat-value">{{ studentGpa }}</div>
+      <div class="stat-label">Current GPA</div>
+    </div>
+  </section>
+
+  <!-- Interactive Search Section -->
+  <section class="interactive-section glass-card">
+    <h2 class="section-title">Quick Search</h2>
+    <p class="section-desc">Search for available courses instantly.</p>
+    
+    <div class="search-box-wrapper">
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Type a course title or code..." class="search-input">
+    </div>
+    
+    @if (searchTerm) {
+      <p class="search-result-text">Searching for: <span class="search-highlight">{{ searchTerm }}</span></p>
+    } @else {
+      <p class="search-result-text text-muted">Start typing to search...</p>
+    }
+  </section>
+
+  <!-- Shared Service Verification Widget -->
+  <section class="widget-section">
+    <app-course-summary-widget></app-course-summary-widget>
+  </section>
+</div>

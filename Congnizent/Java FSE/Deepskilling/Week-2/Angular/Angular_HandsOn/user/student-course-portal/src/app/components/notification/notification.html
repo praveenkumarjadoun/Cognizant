@@ -1,0 +1,15 @@
+<div class="notification-widget glass-card">
+  <h3 class="widget-title">Local Notifications</h3>
+  <p class="widget-desc">This component uses an isolated service instance.</p>
+  
+  <div class="msg-input-wrapper">
+    <input #msgInput type="text" placeholder="Type notification..." (keyup.enter)="addMessage(msgInput)" class="form-control">
+    <button (click)="addMessage(msgInput)" class="btn btn-primary btn-sm">Add</button>
+  </div>
+  
+  <ul class="msg-list">
+    <li *ngFor="let item of notificationService.getNotifications()" class="msg-item">
+      {{ item }}
+    </li>
+  </ul>
+</div>

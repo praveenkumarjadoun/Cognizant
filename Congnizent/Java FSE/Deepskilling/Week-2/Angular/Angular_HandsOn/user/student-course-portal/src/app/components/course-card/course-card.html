@@ -1,0 +1,35 @@
+<div class="course-card-container" 
+     *ngIf="enrolledIds$ | async as enrolledIds"
+     [ngClass]="{ 'card--enrolled': enrolledIds.includes(course.id), 'card--full': course.credits >= 4, 'expanded': isExpanded }" 
+     [ngStyle]="{ 'border-left': '4px solid ' + (course.gradeStatus === 'passed' ? '#10b981' : course.gradeStatus === 'failed' ? '#ef4444' : '#6b7280') }"
+     appHighlight="rgba(139, 92, 246, 0.15)">
+  
+  <div class="card-header">
+    <span class="course-code">{{ course.code }}</span>
+    <div [ngSwitch]="course.gradeStatus">
+      <span *ngSwitchCase="'passed'" class="badge badge-passed">Passed</span>
+      <span *ngSwitchCase="'failed'" class="badge badge-failed">Failed</span>
+      <span *ngSwitchCase="'pending'" class="badge badge-pending">Pending</span>
+      <span *ngSwitchDefault class="badge badge-pending">Pending</span>
+    </div>
+  </div>
+  
+  <h3 class="course-title">{{ course.name }}</h3>
+  <p class="course-credits">{{ course.credits | creditLabel }}</p>
+  
+  <div class="card-expanded-content" *ngIf="isExpanded">
+    <div class="details-divider"></div>
+    <p class="detail-item"><strong>Course ID:</strong> {{ course.id }}</p>
+    <p class="detail-item"><strong>Academic Code:</strong> {{ course.code }}</p>
+    <p class="detail-item-desc">Comprehensive learning path covering architectural patterns, core concepts, and advanced hands-on implementations.</p>
+  </div>
+  
+  <div class="card-footer">
+    <button (click)="$event.stopPropagation(); toggleDetails()" class="btn btn-secondary btn-sm">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+    <button (click)="$event.stopPropagation(); toggleEnroll(enrolledIds.includes(course.id))" class="btn btn-primary btn-sm">
+      {{ enrolledIds.includes(course.id) ? 'Unenroll' : 'Enroll' }}
+    </button>
+  </div>
+</div>
